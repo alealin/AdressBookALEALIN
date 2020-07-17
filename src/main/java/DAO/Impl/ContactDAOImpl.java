@@ -23,32 +23,32 @@ public class ContactDAOImpl implements ContactDAO {
     }
 
     public Contact findContactByParametrs(Scanner scanner, Contact[] store) throws ContactBookException {
-        Contact contactTemp = null;
+        Contact temp = null;
         boolean end = false;
         do {
             System.out.println(FIND_MENU);
             if (scanner.hasNextInt()) {
                 switch (scanner.nextInt()) {
                     case 1: {
-                        contactTemp = findByID(scanner,store,contactTemp);
+                        temp = findByID(scanner,store);
                         end = true;
                         break;
                     }
 
                     case 2: {
-                        contactTemp = findByName(scanner,store,contactTemp);
+                        temp = findByName(scanner,store);
                         end = true;
                         break;
                     }
 
                     case 3: {
-                        contactTemp = findBySername(scanner,store,contactTemp);
+                        temp = findBySername(scanner,store);
                         end = true;
                         break;
                     }
 
                     case 4: {
-                        contactTemp = findByPhone (scanner,store,contactTemp);
+                        temp = findByPhone (scanner,store);
                         end = true;
                         break;
                     }
@@ -70,10 +70,10 @@ public class ContactDAOImpl implements ContactDAO {
                 scanner.next();
             }
         } while (!end);
-        if (Objects.isNull(contactTemp)) {
+        if (Objects.isNull(temp)) {
             throw new ContactBookException(ResponseCode.CONTACT_NOT_FOUND, ConstantsMessages.CONTACT_NOT_FOUND);
         }
-        return contactTemp;
+        return temp;
     }
 
     public void addNewContactInStore(Contact contact, Contact[] store) throws ContactBookException {
@@ -93,8 +93,9 @@ public class ContactDAOImpl implements ContactDAO {
         }
     }
 
-    public Contact findByID (Scanner scanner, Contact[] store, Contact contactTemp) {
+    public Contact findByID (Scanner scanner, Contact[] store) {
         boolean end = false;
+        Contact temp = null;
         do {
             System.out.println(ConstantsMessages.ENTER_SEARCH_PARAMETR + "You need choose from 0 to " + (store.length - 1) + ".");
             if (scanner.hasNextInt()) {
@@ -102,8 +103,7 @@ public class ContactDAOImpl implements ContactDAO {
                 if ((0 <= searchParam) && (searchParam <= (store.length - 1))) {
                     for (int argument = 0; argument < store.length; argument++) {
                         if ((Objects.nonNull(store[argument])) && (store[argument].getId() == searchParam)) {
-                            contactTemp = store[argument];
-                            break;
+                            return store[argument];
                         }
                     }
                     end = true;
@@ -115,43 +115,46 @@ public class ContactDAOImpl implements ContactDAO {
                 scanner.next();
             }
         } while (!end);
-        return contactTemp;
+        return temp;
     }
 
-    public Contact findByName (Scanner scanner, Contact[] store, Contact contactTemp) {
+    public Contact findByName (Scanner scanner, Contact[] store) {
+        Contact temp = null;
         System.out.println(ConstantsMessages.ENTER_SEARCH_PARAMETR);
         String searchParam = scanner.next();
         for (int argument = 0; argument < store.length; argument++) {
             if (Objects.nonNull(store[argument]) && Objects.equals(store[argument].getName(), searchParam)) {
-                contactTemp = store[argument];
+                temp = store[argument];
                 break;
             }
         }
-        return contactTemp;
+        return temp;
     }
 
-    public Contact findBySername (Scanner scanner, Contact[] store, Contact contactTemp) {
+    public Contact findBySername (Scanner scanner, Contact[] store) {
+        Contact temp = null;
         System.out.println(ConstantsMessages.ENTER_SEARCH_PARAMETR);
         String searchParam = scanner.next();
         for (int argument = 0; argument < store.length; argument++) {
             if (Objects.nonNull(store[argument]) && Objects.equals(store[argument].getSername(), searchParam)) {
-                contactTemp = store[argument];
+                temp = store[argument];
                 break;
             }
         }
-        return contactTemp;
+        return temp;
     }
 
-    public Contact findByPhone (Scanner scanner, Contact[] store, Contact contactTemp) {
+    public Contact findByPhone (Scanner scanner, Contact[] store) {
+        Contact temp = null;
         System.out.println(ConstantsMessages.ENTER_SEARCH_PARAMETR);
         String searchParam = scanner.next();
         for (int argument = 0; argument < store.length; argument++) {
             if (Objects.nonNull(store[argument]) && Objects.equals(store[argument].getPhoneNumber(), searchParam)) {
-                contactTemp = store[argument];
+                temp = store[argument];
                 break;
             }
         }
-        return contactTemp;
+        return temp;
     }
 
     public void saveContactInStore(Contact contact, Contact[] store) {
