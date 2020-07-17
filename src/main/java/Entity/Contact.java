@@ -1,7 +1,8 @@
 package Entity;
 
-import java.time.LocalDateTime;
+
 import java.util.Date;
+import java.util.Objects;
 
 public class Contact {
     private int id;
@@ -11,13 +12,13 @@ public class Contact {
     private double height;
     private boolean maried=false;
     private String phoneNumber;
-    private LocalDateTime createDate;
+    private Date createDate;
 
 
     public Contact() {
     }
 
-    public Contact(int id, String name, String sername, int age, double growth, boolean maried, String phoneNumber, LocalDateTime createDate) {
+    public Contact(int id, String name, String sername, int age, double growth, boolean maried, String phoneNumber, Date createDate) {
         this.id = id;
         this.name = name;
         this.sername = sername;
@@ -84,11 +85,11 @@ public class Contact {
         this.phoneNumber = phoneNumber;
     }
 
-    public LocalDateTime getCreateDate() {
+    public Date getCreateDate() {
         return createDate;
     }
 
-    public void setCreateDate(LocalDateTime createDate) {
+    public void setCreateDate(Date createDate) {
         this.createDate = createDate;
     }
 
@@ -96,17 +97,13 @@ public class Contact {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         Contact contact = (Contact) o;
-
-        if (id != contact.id) return false;
-        if (age != contact.age) return false;
-        if (Double.compare(contact.height, height) != 0) return false;
-        if (maried != contact.maried) return false;
-        if (name != null ? !name.equals(contact.name) : contact.name != null) return false;
-        if (sername != null ? !sername.equals(contact.sername) : contact.sername != null) return false;
-        if (phoneNumber != null ? !phoneNumber.equals(contact.phoneNumber) : contact.phoneNumber != null) return false;
-        return createDate != null ? createDate.equals(contact.createDate) : contact.createDate == null;
+        return  age == contact.age &&
+                Double.compare(contact.height, height) == 0 &&
+                maried == contact.maried &&
+                Objects.equals(name, contact.name) &&
+                Objects.equals(sername, contact.sername) &&
+                Objects.equals(phoneNumber, contact.phoneNumber);
     }
 
     @Override

@@ -1,9 +1,11 @@
-package Exception;
+package Constants;
 
 public enum ResponseCode {
-    NOT_FOUND(404),
-    OBGECT_EXIST (302);
-
+    UNKNOWN_PROBLEM(000),
+    CONTACT_NOT_FOUND(404),
+    CONTACT_EXIST (303),
+    WRONG_DATA_INPUT(505),
+    SERVER_ERROR(500);
 
     private int code;
 
@@ -15,3 +17,5 @@ public enum ResponseCode {
         return code;
     }
 }
+
+
