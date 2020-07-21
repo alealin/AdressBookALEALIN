@@ -19,8 +19,7 @@ public interface ComandLineService {
      * @param scanner            scanner of console input.
      * @param contactServiceImpl service that work with obgect from DAO.
      * @param contactDAOImpl     service that work with DAO layer.
-     * @param comandLineServce   service that work with user.
      */
     void run(Scanner scanner, ContactServiceImpl contactServiceImpl,
-             ContactDAOImpl contactDAOImpl, ComandLineServceImpl comandLineServce);
+             ContactDAOImpl contactDAOImpl);
 }

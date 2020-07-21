@@ -19,7 +19,7 @@ public class ComandLineServceImpl implements ComandLineService {
     }
 
     public void run(Scanner scanner, ContactServiceImpl contactServiceImpl,
-                    ContactDAOImpl contactDAOImpl, ComandLineServceImpl comandLineServceImpl) {
+                    ContactDAOImpl contactDAOImpl) {
 
         Contact test = new Contact(0, "test","test", 20, 1.75, true, "0",null);
         contactDAOImpl.getStore()[0]=test;
@@ -27,7 +27,7 @@ public class ComandLineServceImpl implements ComandLineService {
 
         boolean exit = false;
         do {
-            comandLineServceImpl.showMenu();
+            showMenu();
             if (scanner.hasNextInt()) {
                 switch (scanner.nextInt()) {
                     case 1: {
